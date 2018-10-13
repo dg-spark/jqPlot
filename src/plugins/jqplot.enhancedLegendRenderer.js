@@ -121,9 +121,6 @@
                 
             for (i=0; i<nr; i++) {
                 tr = $(document.createElement('tr'));
-                tr.addClass('jqplot-table-legend');
-				//Issue-177 | added element series class reference jqplot-table-legend-series-[sidx]
-				tr.addClass("jqplot-table-legend-series-" + idx);
                 if (reverse){
                     tr.prependTo(this._elem);
                 }
@@ -168,7 +165,9 @@
 
                             td2 = $(document.createElement('td'));
                             td2.addClass('jqplot-table-legend jqplot-table-legend-label');
-                            td2.css('paddingTop', rs);
+							td2.css('paddingTop', rs);
+							//Issue-177 | added jqplot series class reference jqplot-table-legend-series-[sidx]	- used to locate legend td element for series.
+							td2.addClass("jqplot-table-legend-series-" + idx);
                     
                             // td1 = $('<td class="jqplot-table-legend" style="text-align:center;padding-top:'+rs+';">'+
                             //     '<div><div class="jqplot-table-legend-swatch" style="background-color:'+color+';border-color:'+color+';"></div>'+
@@ -278,9 +277,9 @@
 
 				//Issue-177 | removed element index based location of series legend element and replaced with explicit class reference jqplot-table-legend-series-[sidx]
                 if (s.canvas._elem.is(':hidden') || !s.show) {
-                    plot.legend._elem.find('tr.jqplot-table-legend-series-' + sidx + ' td.jqplot-table-legend-label').addClass('jqplot-series-hidden');
+                    plot.legend._elem.find('td.jqplot-table-legend-series-' + sidx).addClass('jqplot-series-hidden');
                 } else {
-                    plot.legend._elem.find('tr.jqplot-table-legend-series-' + sidx + ' td.jqplot-table-legend-label').removeClass('jqplot-series-hidden');
+                    plot.legend._elem.find('td.jqplot-table-legend-series-' + sidx).removeClass('jqplot-series-hidden');
                 }
 
             }
